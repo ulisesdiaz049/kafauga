@@ -166,12 +166,12 @@ function HomeView({ users, onSave }) {
                 <p className="text-xs text-cyan-400 mt-1">{matchedUser.classTime}</p>
               </div>
               <div className="flex gap-4">
-                <button onClick={() => handleAttendance('Asiste')} className="flex-1 bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-400 hover:to-cyan-300 text-slate-900 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-cyan-500/30">
-                  <CheckCircle size={20} /> Asistiré
-                </button>
-                <button onClick={() => handleAttendance('No asiste')} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95">
-                  <XCircle size={20} /> No Asistiré
-                </button>
+                <button onClick={() => handleSave(user.id, 'Asiste')} className="flex-1 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white font-bold py-3 rounded-xl shadow-lg transition-transform active:scale-95 text-sm">
+					Asistiré
+				</button>
+                <button onClick={() => handleSave(user.id, 'No asiste')} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-transform active:scale-95 text-sm border border-slate-600">
+					No asistiré
+				</button>
               </div>
             </div>
           ) : (
