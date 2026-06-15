@@ -209,7 +209,7 @@ function AdminLogin({ onSuccess }) {
           Entrar al Dashboardulises
         </button>
       </div>
-      <!--p className="text-[10px] text-slate-500 text-center mt-6">Credenciales demo: admin / 123456789</p-->
+      <p className="text-[10px] text-slate-500 text-center mt-6">Credenciales demo: admin / 123456789</p>
     </div>
   );
 }
