@@ -297,6 +297,12 @@ function ReservasTab({ users, todayAttendances }) {
             if (att?.status === 'Asiste') statusBadge = <span className="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-xs font-medium">Asiste</span>;
             else if (att?.status === 'No asiste') statusBadge = <span className="bg-pink-500/10 text-pink-400 border border-pink-500/20 px-3 py-1 rounded-full text-xs font-medium">No asiste</span>;
 
+			const appUrl = typeof window !== 'undefined' ? window.location.origin : '[https://tu-dominio.com](https://tu-dominio.com)';
+            const waMsg = `Hola ${user.name}, te recordamos confirmar tu asistencia hoy en KaFa Estudio a tu clase de ${user.classTime}. Puedes registrar tu asistencia aquí: ${appUrl}`;
+            const cleanPhone = user.phone ? user.phone.replace(/\D/g, '') : '';
+            const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMsg)}`;
+            const mailLink = `mailto:${user.email || ''}?subject=Recordatorio KaFa Estudio&body=${encodeURIComponent(waMsg)}`;
+
             return (
               <div key={user.id} className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-700/10 transition-colors">
                 <div className="flex items-center gap-4">
@@ -307,9 +313,18 @@ function ReservasTab({ users, todayAttendances }) {
                   {statusBadge}
                   {!att && (
                     <div className="flex gap-2">
-                      <button className="p-2 border border-green-900/50 bg-green-900/20 text-green-500 hover:bg-green-900/40 rounded-lg transition-colors"><MessageCircle size={16} /></button>
-                      <button className="p-2 border border-slate-700 bg-[#0f172a] text-slate-400 hover:text-white rounded-lg transition-colors"><Mail size={16} /></button>
+                      {cleanPhone ? (
+                        <a href={waLink} target="_blank" rel="noopener noreferrer" title="Notificar por WhatsApp" className="p-2 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 rounded-lg transition-colors cursor-pointer inline-flex"><MessageCircle size={18} /></a>
+                      ) : (
+                        <button disabled title="Sin número registrado" className="p-2 bg-slate-800 text-slate-600 rounded-lg cursor-not-allowed inline-flex"><MessageCircle size={18} /></button>
+                      )}
+                      {user.email ? (
+                        <a href={mailLink} target="_blank" rel="noopener noreferrer" title="Notificar por Correo" className="p-2 bg-slate-700 text-slate-300 hover:bg-slate-600 rounded-lg transition-colors cursor-pointer inline-flex"><Mail size={18} /></a>
+                      ) : (
+                        <button disabled title="Sin correo registrado" className="p-2 bg-slate-800 text-slate-600 rounded-lg cursor-not-allowed inline-flex"><Mail size={18} /></button>
+                      )}
                     </div>
+
                   )}
                 </div>
               </div>
