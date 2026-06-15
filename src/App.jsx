@@ -164,7 +164,7 @@ function HomeView({ users, onSave }) {
                 <p className="text-sm text-slate-400">Hola,</p>
                 <p className="text-xl font-bold text-white">{matchedUser.name} {matchedUser.lastNameP}</p>
                 <p className="text-xs text-cyan-400 mt-1">{matchedUser.classTime}</p>
-				  <p className="text-xs text-cyan-400 mt-1">{matchedUser.status}</p>
+				  <p className="text-xs text-cyan-400 mt-1">Estatus: {matchedUser.status}</p>
               </div>
               <div className="flex gap-4">
                 <button onClick={() => handleSave(user.id, 'Asiste')} className="flex-1 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white font-bold py-3 rounded-xl shadow-lg transition-transform active:scale-95 text-sm">
