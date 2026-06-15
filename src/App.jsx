@@ -136,7 +136,7 @@ function HomeView({ users, onSave }) {
         )}
         
         <div className="w-full mb-6">
-          <label className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-2">INGRESA TU NIP</label>
+          <label className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-2">INGRESA TU NIPO</label>
           <input 
             type="password" 
             value={nip} 
