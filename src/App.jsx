@@ -206,7 +206,7 @@ function AdminLogin({ onSuccess }) {
           onClick={handleLogin} 
           className="w-full bg-[#f43f5e] hover:bg-[#e11d48] text-white font-bold py-3 rounded-lg transition-colors mt-4 text-sm shadow-lg shadow-pink-500/20"
         >
-          Entrar al Dashboard
+          Entrar al Dashboardulises
         </button>
       </div>
       <!--p className="text-[10px] text-slate-500 text-center mt-6">Credenciales demo: admin / 123456789</p-->
