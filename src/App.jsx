@@ -176,7 +176,7 @@ function HomeView({ users, onSave }) {
             </div>
           ) : (
             <div className="w-full h-[150px] flex items-center justify-center text-slate-500 text-sm italic">
-              {nip.length > 0 ? "Buscando NIPO..." : "Esperando NIPO..."}
+              {nip.length > 0 ? "Buscando NIP..." : "Esperando NIP..."}
             </div>
           )}
 
