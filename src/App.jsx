@@ -176,43 +176,65 @@ function AdminLogin({ onSuccess }) {
     else setError(true);
   };
 
-  return (
-    <div className="w-full max-w-[380px] bg-[#1e293b] p-8 rounded-3xl shadow-2xl border border-slate-700/50">
-      <div className="flex justify-center mb-4 text-pink-500">
-        <Settings size={44} strokeWidth={1.5} />
-      </div>
-      <h2 className="text-2xl font-bold text-center text-white mb-8">Acceso Admin</h2>
-      
-      {error && <p className="text-red-400 text-xs text-center mb-4">Credenciales incorrectas</p>}
+  const handleSubmit = (e) => {
+  e.preventDefault(); // Evita que la página se recargue
+  handleLogin();
+};
 
-      <div className="space-y-4">
-        <div>
-          <label className="block text-xs font-semibold text-slate-400 mb-1">Usuario</label>
-          <input 
-            type="text" value={user} onChange={(e) => setUser(e.target.value)} 
-            className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-pink-500 outline-none text-sm" 
-            placeholder="Ej: admin" 
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-slate-400 mb-1">Contraseña</label>
-          <input 
-            type="password" value={pass} onChange={(e) => setPass(e.target.value)} 
-            className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-pink-500 outline-none text-sm" 
-            placeholder="••••" 
-          />
-        </div>
-        <button 
-          onClick={handleLogin} 
-          className="w-full bg-[#f43f5e] hover:bg-[#e11d48] text-white font-bold py-3 rounded-lg transition-colors mt-4 text-sm shadow-lg shadow-pink-500/20"
-        >
-          Entrar al Dashboard
-        </button>
-      </div>
-      {/*<p className="text-[10px] text-slate-500 text-center mt-6">Credenciales demo: admin / 123456789</p>*/}
+return (
+  <div className="w-full max-w-[380px] bg-[#1e293b] p-8 rounded-3xl shadow-2xl border border-slate-700/50">
+    <div className="flex justify-center mb-4 text-pink-500">
+      <Settings size={44} strokeWidth={1.5} />
     </div>
-  );
-}
+
+    <h2 className="text-2xl font-bold text-center text-white mb-8">
+      Acceso Admin
+    </h2>
+
+    {error && (
+      <p className="text-red-400 text-xs text-center mb-4">
+        Credenciales incorrectas
+      </p>
+    )}
+
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label className="block text-xs font-semibold text-slate-400 mb-1">
+          Usuario
+        </label>
+
+        <input
+          type="text"
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
+          className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-pink-500 outline-none text-sm"
+          placeholder="Ej: admin"
+        />
+      </div>
+
+      <div>
+        <label className="block text-xs font-semibold text-slate-400 mb-1">
+          Contraseña
+        </label>
+
+        <input
+          type="password"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+          className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-pink-500 outline-none text-sm"
+          placeholder="••••"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-[#f43f5e] hover:bg-[#e11d48] text-white font-bold py-3 rounded-lg transition-colors mt-4 text-sm shadow-lg shadow-pink-500/20"
+      >
+        Entrar al Dashboard
+      </button>
+    </form>
+  </div>
+);
 
 // ==========================================
 // DASHBOARD ADMINISTRADOR
