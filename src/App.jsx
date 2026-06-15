@@ -195,7 +195,7 @@ function AdminLogin({ onSuccess }) {
         <div>
           <label className="block text-xs font-semibold text-slate-400 mb-1">Usuario</label>
           <input 
-            type="text" value={user} onChange={(e) => setUser(e.target.value)} 
+            type="text" value={user} onChange={(e) => setUser(e.target.value)} onKeyDown={handleKeyDown}
             className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-pink-500 outline-none text-sm" 
             placeholder="Ej: admin" 
           />
@@ -203,7 +203,7 @@ function AdminLogin({ onSuccess }) {
         <div>
           <label className="block text-xs font-semibold text-slate-400 mb-1">Contraseña</label>
           <input 
-            type="password" value={pass} onChange={(e) => setPass(e.target.value)} 
+            type="password" value={pass} onChange={(e) => setPass(e.target.value)} onKeyDown={handleKeyDown}
             className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-pink-500 outline-none text-sm" 
             placeholder="••••" 
           />
