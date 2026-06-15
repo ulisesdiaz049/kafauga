@@ -108,12 +108,24 @@ function HomeView({ users, onSave }) {
   const [message, setMessage] = useState(null);
   const user = users.find(u => u.nip === nip);
 
+  const matchedUser = useMemo(() => {
+	if (nip.length >= 3) return users.find(u => u.nip === nip);
+	return null;
+  }, [nip, users]);
+
   const handleSave = (id, status) => {
     onSave(id, status);
     setMessage(`¡Asistencia guardada con éxito!`);
     setNip('');
     setTimeout(() => setMessage(null), 3000);
   };
+	const handleAttendance = async (status) => {
+		if (!matchedUser) return;
+		await onSaveAttendance(matchedUser.id, status);
+		setMessage(`¡Gracias ${matchedUser.name}! Tu registro (${status}) ha sido guardado.`);
+		setNip('');
+		setTimeout(() => setMessage(null), 4000);
+	};
 
   return (
     <div className="w-full max-w-[420px] bg-[#1e293b] rounded-3xl shadow-2xl overflow-hidden relative border border-slate-700/50">
@@ -146,18 +158,28 @@ function HomeView({ users, onSave }) {
           />
         </div>
 
-        {user ? (
-          <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <div className="flex gap-3">
-              <button onClick={() => handleSave(user.id, 'Asiste')} className="flex-1 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white font-bold py-3 rounded-xl shadow-lg transition-transform active:scale-95 text-sm">Asistiré</button>
-              <button onClick={() => handleSave(user.id, 'No asiste')} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-transform active:scale-95 text-sm border border-slate-600">No asistiré</button>
+        {matchedUser ? (
+            <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
+              <div className="bg-slate-900/50 rounded-xl p-4 mb-6 text-center border border-slate-700/50">
+                <p className="text-sm text-slate-400">Hola,</p>
+                <p className="text-xl font-bold text-white">{matchedUser.name} {matchedUser.lastNameP}</p>
+                <p className="text-xs text-cyan-400 mt-1">{matchedUser.classTime}</p>
+              </div>
+              <div className="flex gap-4">
+                <button onClick={() => handleAttendance('Asiste')} className="flex-1 bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-400 hover:to-cyan-300 text-slate-900 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-cyan-500/30">
+                  <CheckCircle size={20} /> Asistiré
+                </button>
+                <button onClick={() => handleAttendance('No asiste')} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95">
+                  <XCircle size={20} /> No Asistiré
+                </button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <p className="text-slate-500 text-xs italic h-[44px] flex items-center">
-            {nip.length > 0 ? "Buscando NIP..." : "Esperando NIP..."}
-          </p>
-        )}
+          ) : (
+            <div className="w-full h-[150px] flex items-center justify-center text-slate-500 text-sm italic">
+              {nip.length > 0 ? "Buscando NIP..." : "Esperando NIP..."}
+            </div>
+          )}
+
       </div>
     </div>
   );
